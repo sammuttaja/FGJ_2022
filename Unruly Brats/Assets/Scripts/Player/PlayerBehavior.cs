@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Utilities;
 
 namespace FGJ_2022.Player
 {
@@ -36,7 +34,10 @@ namespace FGJ_2022.Player
 
         private void FixedUpdate()
         {
-
+            _moveInput = _playerActions.Player.Move.ReadValue<Vector2>();
+            _moveInput.x = 0f;
+            _moveInput.y = 0f;
+            _rbody.velocity = _moveInput * _speed;
         }
     }
 }
