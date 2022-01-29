@@ -2171,6 +2171,7 @@ MonoBehaviour:
   _speed: 3
   pauseContainer: {fileID: 244006763}
   noButton: {fileID: 645451960}
+  animator: {fileID: 0}
 --- !u!50 &469032901
 Rigidbody2D:
   serializedVersion: 4
