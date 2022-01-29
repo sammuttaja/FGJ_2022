@@ -19,6 +19,9 @@ namespace FGJ_2022.Player
         [SerializeField]
         private GameObject noButton;
 
+        [SerializeField]
+        private Animator animator;
+
         private PlayerInputActions _playerActions;
         private Rigidbody2D _rbody;
         private Vector2 _moveInput;
