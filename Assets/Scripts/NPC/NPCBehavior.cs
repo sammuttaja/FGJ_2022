@@ -25,6 +25,7 @@ namespace FGJ_2022.NPC
         private bool IsFollowing = false;
         private bool IsMoving = false;
         bool isCaught = false;
+        private Animator animator;
 
         [SerializeField]
         private float idleTime = 0;
@@ -34,6 +35,7 @@ namespace FGJ_2022.NPC
 
         private void Start()
         {
+            animator = GetComponent<Animator>();
             Player = GameObject.FindGameObjectWithTag("Player").transform;
             playerData = Player.gameObject.GetComponent<PlayerBehavior>();
             InitialPos = transform.position;
@@ -63,6 +65,7 @@ namespace FGJ_2022.NPC
                 if(Vector3.Distance(transform.position, Player.position) > ViewRadius)
                 {
                     IsFollowing = false;
+                    animator.SetFloat("Speed", 0);
                 }
             }
 
@@ -94,8 +97,10 @@ namespace FGJ_2022.NPC
                 Vector2 PlayerPos = new Vector2(Player.position.x, Player.position.y);
                 Vector2 NpcPosition = new Vector2(transform.position.x, transform.position.y);
                 Vector2 PlayerDir = (PlayerPos - NpcPosition).normalized;
-                transform.position = NpcPosition + PlayerDir * Speed * Time.deltaTime;
-                if(Vector2.Distance(PlayerPos, NpcPosition) < caughtMinDistance)
+                Vector2 speed = NpcPosition + PlayerDir * Speed * Time.deltaTime;
+                transform.position = speed;
+                Animate(PlayerDir, speed.magnitude);
+                if (Vector2.Distance(PlayerPos, NpcPosition) < caughtMinDistance)
                 {
                     //TODO Add game over
                     if (GameoverUI != null)
@@ -118,7 +123,9 @@ namespace FGJ_2022.NPC
             if (Vector2.Distance(transform.position, PatrollPatterPoints[TargetIndex]) >= 0.2f)
             {
                 Vector2 dir = (PatrollPatterPoints[TargetIndex] - new Vector2(transform.position.x, transform.position.y)).normalized;
-                transform.position = new Vector2(transform.position.x, transform.position.y) + dir * Speed * Time.deltaTime;
+                Vector2 speed = new Vector2(transform.position.x, transform.position.y) + dir * Speed * Time.deltaTime;
+                transform.position = speed;
+                Animate(dir, speed.magnitude);
             }
             else if (Vector2.Distance(transform.position, PatrollPatterPoints[TargetIndex]) <= 0.4f)
             {
@@ -139,12 +146,28 @@ namespace FGJ_2022.NPC
             else if (Vector2.Distance(transform.position, newPos) >= 0.4f && IsMoving)
             {
                 Vector2 dir = (newPos - new Vector2(transform.position.x, transform.position.y)).normalized;
-                transform.position = new Vector2(transform.position.x, transform.position.y) + dir * Speed * Time.deltaTime;
+                Vector2 speed = new Vector2(transform.position.x, transform.position.y) + dir * Speed * Time.deltaTime;
+                transform.position = speed;
+                Animate(dir, speed.magnitude);
             }
             else if (Vector2.Distance(transform.position, newPos) <= 0.4f)
             {
                 IsMoving = false;
             }
+        }
+
+        Vector2 lastDirecton;
+        void Animate(Vector2 direction, float speed)
+        {
+
+            if (direction != Vector2.zero)
+                lastDirecton = direction;
+            animator.SetFloat("Speed", speed);
+            animator.SetFloat("Horizontal", direction.x);
+            animator.SetFloat("Vertical", direction.y);
+
+            animator.SetFloat("LastX", lastDirecton.x);
+            animator.SetFloat("LastY", lastDirecton.y);
         }
 
         public void StopFollowing()

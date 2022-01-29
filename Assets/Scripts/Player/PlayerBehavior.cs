@@ -22,6 +22,15 @@ namespace FGJ_2022.Player
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        Animation idle_West;
+        [SerializeField]
+        Animation idle_East;
+        [SerializeField]
+        Animation idle_North;
+        [SerializeField]
+        Animation idle_South;
+
         private PlayerInputActions _playerActions;
         private Rigidbody2D _rbody;
         private Vector2 _moveInput;
@@ -63,15 +72,21 @@ namespace FGJ_2022.Player
             _playerActions.Player.Disable();
         }
 
+        Vector2 lastDirecton;
+
         private void FixedUpdate()
         {
             // Get the input from WASD / arrows and set the movement.
             _moveInput = _playerActions.Player.Move.ReadValue<Vector2>();
             _rbody.velocity = _moveInput * _speed;
-
+            if(_moveInput != Vector2.zero)
+                lastDirecton = _moveInput;
             animator.SetFloat("_speed", _rbody.velocity.magnitude);
             animator.SetFloat("Horizontal", _moveInput.x);
             animator.SetFloat("Vertical", _moveInput.y);
+
+            animator.SetFloat("LastX", lastDirecton.x);
+            animator.SetFloat("LastY", lastDirecton.y);
 
             // Activate the quit UI.
             if (_playerActions.Player.Exit.WasPressedThisFrame())
