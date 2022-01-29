@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace FGJ_2022.Player
 {
@@ -22,11 +20,15 @@ namespace FGJ_2022.Player
         private PlayerInputActions _playerActions;
         private Rigidbody2D _rbody;
         private Vector2 _moveInput;
-
+        private PlayerMask _mask;
+        private bool _withMask;
 
         private void Awake()
         {
+            _withMask = false;
+
             _playerActions = new PlayerInputActions();
+            _mask = new PlayerMask(100);
 
             _rbody = GetComponent<Rigidbody2D>();
             if (_rbody == null)
@@ -62,6 +64,26 @@ namespace FGJ_2022.Player
                     pauseContainer.SetActive(false);
                 }
             }
+
+            // Activate the mask.
+            if (_playerActions.Player.ActivateMask.WasPressedThisFrame() && _withMask == false)
+            {
+                _withMask = true;
+            }
+            else if (_playerActions.Player.ActivateMask.WasPressedThisFrame() && _withMask == true)
+            {
+                _withMask = false;
+            }
+
+            if (_withMask && _mask._maskPower > 0)
+                _mask._maskPower -= 10f * Time.deltaTime;
+            else if (!_withMask && (_mask._maskPower < _mask._maxMaskPower))
+                _mask._maskPower += 10f * Time.deltaTime;
+
+            if (_mask._maskPower <= 0)
+                _withMask = false;
+
+            Debug.Log("Is with mask: " + _mask._maskPower);
         }
     }
 }
