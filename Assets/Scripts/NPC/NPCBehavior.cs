@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FGJ_2022.Player;
 
 namespace FGJ_2022.NPC
 {
@@ -8,18 +9,21 @@ namespace FGJ_2022.NPC
     public class NPCBehavior : MonoBehaviour
     {
         //TODO Create NPC behavior!
-
+        [Header("NPC Properties")]
         public float Speed = 4;
         public float MovementRadius = 2;
         public float ViewRadius = 3;
         public float caughtMinDistance = 0.4f;
         public Transform Player;
         public NPCEnums Behavior;
+        public GameObject GameoverUI;
+        [Header("Patroll list")]
         public List<Transform> PatrolPattern = new List<Transform>();
 
         private Vector3 InitialPos;
         private bool IsFollowing = false;
         private bool IsMoving = false;
+
         [SerializeField]
         private float idleTime = 0;
         private Vector2 newPos;
@@ -28,6 +32,8 @@ namespace FGJ_2022.NPC
 
         private void Start()
         {
+            Player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerData = Player.gameObject.GetComponent<PlayerBehavior>();
             InitialPos = transform.position;
             idleTime = Random.Range(5, 10);
 
@@ -40,10 +46,12 @@ namespace FGJ_2022.NPC
             }
         }
 
+        PlayerBehavior playerData;
+
         private void Update()
         {
 
-            if(Vector2.Distance(transform.position, new Vector2(Player.position.x, Player.position.y)) <= ViewRadius)
+            if(Vector2.Distance(transform.position, new Vector2(Player.position.x, Player.position.y)) <= ViewRadius && !playerData.IsMaskOn)
             {
                 IsFollowing = true;
             }
@@ -80,6 +88,8 @@ namespace FGJ_2022.NPC
                 if(Vector2.Distance(PlayerPos, NpcPosition) < caughtMinDistance)
                 {
                     //TODO Add game over
+                    if (GameoverUI != null)
+                        GameoverUI.SetActive(true);
                 }
 
 
