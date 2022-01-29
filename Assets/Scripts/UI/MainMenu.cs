@@ -6,12 +6,6 @@ namespace FGJ_2022.UI
     [AddComponentMenu("FGJ_2022/UI Main Menu")]
     public class MainMenu : MonoBehaviour
     {
-        public enum Scenes
-        {
-            MainMenu,
-            Tutorial
-        }
-
         [SerializeField]
         private GameObject scoreBoard;
 
