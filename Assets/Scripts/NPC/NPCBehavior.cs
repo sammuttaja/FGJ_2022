@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using FGJ_2022.Player;
 
@@ -23,6 +24,7 @@ namespace FGJ_2022.NPC
         private Vector3 InitialPos;
         private bool IsFollowing = false;
         private bool IsMoving = false;
+        bool isCaught = false;
 
         [SerializeField]
         private float idleTime = 0;
@@ -50,10 +52,18 @@ namespace FGJ_2022.NPC
 
         private void Update()
         {
-
+            if (isCaught)
+                return;
             if(Vector2.Distance(transform.position, new Vector2(Player.position.x, Player.position.y)) <= ViewRadius && !playerData.IsMaskOn)
             {
                 IsFollowing = true;
+            }
+            if (IsFollowing)
+            {
+                if(Vector3.Distance(transform.position, Player.position) > ViewRadius)
+                {
+                    IsFollowing = false;
+                }
             }
 
             if (!IsFollowing)
@@ -90,6 +100,12 @@ namespace FGJ_2022.NPC
                     //TODO Add game over
                     if (GameoverUI != null)
                         GameoverUI.SetActive(true);
+                    StopFollowing();
+                    NPCBehavior[] otherSheeps = GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<NPCBehavior>()).ToArray(); ;
+                    foreach(NPCBehavior sheep in otherSheeps)
+                    {
+                        sheep.StopFollowing();
+                    }
                 }
 
 
@@ -129,6 +145,12 @@ namespace FGJ_2022.NPC
             {
                 IsMoving = false;
             }
+        }
+
+        public void StopFollowing()
+        {
+            isCaught = true;
+            IsFollowing = false;
         }
 
         private void OnDrawGizmos()
