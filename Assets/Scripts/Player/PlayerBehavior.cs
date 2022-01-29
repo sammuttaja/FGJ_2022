@@ -40,6 +40,9 @@ namespace FGJ_2022.Player
         {
             Enemys = GameObject.FindGameObjectsWithTag("NPC").Select( x => x.transform).ToList();
 
+            if (animator == null)
+                animator = GetComponent<Animator>();
+
             _withMask = false;
 
             _playerActions = new PlayerInputActions();
@@ -65,6 +68,10 @@ namespace FGJ_2022.Player
             // Get the input from WASD / arrows and set the movement.
             _moveInput = _playerActions.Player.Move.ReadValue<Vector2>();
             _rbody.velocity = _moveInput * _speed;
+
+            animator.SetFloat("_speed", _rbody.velocity.magnitude);
+            animator.SetFloat("Horizontal", _moveInput.x);
+            animator.SetFloat("Vertical", _moveInput.y);
 
             // Activate the quit UI.
             if (_playerActions.Player.Exit.WasPressedThisFrame())
