@@ -28,6 +28,7 @@ namespace FGJ_2022.NPC
 
         private void Start()
         {
+            Player = GameObject.FindGameObjectWithTag("Player").transform;
             InitialPos = transform.position;
             idleTime = Random.Range(5, 10);
 
