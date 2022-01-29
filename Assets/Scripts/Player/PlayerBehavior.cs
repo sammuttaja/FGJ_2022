@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 namespace FGJ_2022.Player
@@ -22,9 +24,19 @@ namespace FGJ_2022.Player
         private Vector2 _moveInput;
         private PlayerMask _mask;
         private bool _withMask;
+        private float MaskDrain = 10f;
+
+        private List<Transform> Enemys = new List<Transform>();
+
+        public bool IsMaskOn
+        {
+            get { return _withMask; }
+        }
 
         private void Awake()
         {
+            Enemys = GameObject.FindGameObjectsWithTag("NPC").Select( x => x.transform).ToList();
+
             _withMask = false;
 
             _playerActions = new PlayerInputActions();
@@ -76,7 +88,11 @@ namespace FGJ_2022.Player
             }
 
             if (_withMask && _mask._maskPower > 0)
+            {
+                if(IsEnemyClose(out float distance))
+                    _mask._maskPower -= (10f + Mathf.Lerp(1, 3, distance / 3)) * Time.deltaTime;
                 _mask._maskPower -= 10f * Time.deltaTime;
+            }
             else if (!_withMask && (_mask._maskPower < _mask._maxMaskPower))
                 _mask._maskPower += 10f * Time.deltaTime;
 
@@ -84,6 +100,22 @@ namespace FGJ_2022.Player
                 _withMask = false;
 
             Debug.Log("Is with mask: " + _mask._maskPower);
+        }
+
+        private bool IsEnemyClose(out float distancetoEnemy)
+        {
+            Vector2 currentPos = new Vector2(transform.position.x, transform.position.y);
+            for(int i = 0; i < Enemys.Count; i++)
+            {
+                float distance = Vector2.Distance(currentPos, new Vector2(Enemys[i].position.x, Enemys[i].position.y));
+                if ( distance <= 3)
+                {
+                    distancetoEnemy = distance;
+                    return true;
+                }
+            }
+            distancetoEnemy = float.PositiveInfinity;
+            return false;
         }
     }
 }
