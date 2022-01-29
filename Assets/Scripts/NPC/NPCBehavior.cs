@@ -12,6 +12,7 @@ namespace FGJ_2022.NPC
         public float Speed = 4;
         public float MovementRadius = 2;
         public float ViewRadius = 3;
+        public float caughtMinDistance = 0.4f;
         public Transform Player;
         public NPCEnums Behavior;
         public List<Transform> PatrolPattern = new List<Transform>();
@@ -72,8 +73,15 @@ namespace FGJ_2022.NPC
             }
             else
             {
-                Vector2 PlayerDir = (new Vector2(Player.position.x, Player.position.y) - new Vector2(transform.position.x, transform.position.y)).normalized;
-                transform.position = new Vector2(transform.position.x, transform.position.y) + PlayerDir * Speed * Time.deltaTime;
+                Vector2 PlayerPos = new Vector2(Player.position.x, Player.position.y);
+                Vector2 NpcPosition = new Vector2(transform.position.x, transform.position.y);
+                Vector2 PlayerDir = (PlayerPos - NpcPosition).normalized;
+                transform.position = NpcPosition + PlayerDir * Speed * Time.deltaTime;
+                if(Vector2.Distance(PlayerPos, NpcPosition) < caughtMinDistance)
+                {
+                    //TODO Add game over
+                }
+
 
             }
         }
