@@ -216,5 +216,10 @@ namespace FGJ_2022.NPC
             Gizmos.DrawWireSphere(transform.position, ViewRadius);
         }
 
+        private void OnDisable()
+        {
+            StopCoroutine(doVoice());
+        }
+
     }
 }

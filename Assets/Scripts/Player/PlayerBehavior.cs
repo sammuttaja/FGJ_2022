@@ -24,11 +24,6 @@ namespace FGJ_2022.Player
         [SerializeField]
         private Animator animator;
 
-        [SerializeField]
-        private RuntimeAnimatorController playercontroller;
-        [SerializeField]
-        private RuntimeAnimatorController SheepController;
-
         private PlayerInputActions _playerActions;
         private Rigidbody2D _rbody;
         private Vector2 _moveInput;
