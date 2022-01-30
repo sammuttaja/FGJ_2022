@@ -1,12 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using FGJ_2022.Player;
+using System.Collections;
 
 namespace FGJ_2022.NPC
 {
-    [AddComponentMenu("FGJ_2022/NPC NPC behavior")]
+    [AddComponentMenu("FGJ_2022/NPC/ NPC behavior")]
     public class NPCBehavior : MonoBehaviour
     {
         //TODO Create NPC behavior!
@@ -31,6 +32,15 @@ namespace FGJ_2022.NPC
         private float idleTime = 0;
         private Vector2 newPos;
 
+        [SerializeField]
+        private GameObject gameOverButton;
+
+        [Header("NPC sounds")]
+        public AudioClip angrySheep;
+        public AudioClip[] SheepSounds;
+        private AudioSource audioSrc;
+        private bool hasPlayed;
+
         private List<Vector2> PatrollPatterPoints = new List<Vector2>();
 
         private void Start()
@@ -40,6 +50,8 @@ namespace FGJ_2022.NPC
             playerData = Player.gameObject.GetComponent<PlayerBehavior>();
             InitialPos = transform.position;
             idleTime = Random.Range(5, 10);
+            audioSrc = GetComponent<AudioSource>();
+            hasPlayed = false;
 
             if(PatrolPattern.Count > 0)
             {
@@ -48,6 +60,8 @@ namespace FGJ_2022.NPC
                     PatrollPatterPoints.Add(new Vector2(PatrolPattern[i].position.x, PatrolPattern[i].position.y));
                 }
             }
+
+            StartCoroutine(doVoice());
         }
 
         PlayerBehavior playerData;
@@ -67,6 +81,12 @@ namespace FGJ_2022.NPC
                     IsFollowing = false;
                     animator.SetFloat("Speed", 0);
                 }
+            }
+
+            if (IsFollowing == true && hasPlayed == false)
+            {
+                audioSrc.PlayOneShot(angrySheep);
+                hasPlayed = true;
             }
 
             if (!IsFollowing)
@@ -89,8 +109,10 @@ namespace FGJ_2022.NPC
                             break;
                         }
                 }
+
                 if(Behavior != NPCEnums.Stay)
                     idleTime -= Time.deltaTime;
+                hasPlayed = false;
             }
             else
             {
@@ -107,7 +129,8 @@ namespace FGJ_2022.NPC
                         GameoverUI.SetActive(true);
                     StopFollowing();
                     NPCBehavior[] otherSheeps = GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<NPCBehavior>()).ToArray(); ;
-                    foreach(NPCBehavior sheep in otherSheeps)
+                    EventSystem.current.SetSelectedGameObject(gameOverButton);
+                    foreach (NPCBehavior sheep in otherSheeps)
                     {
                         sheep.StopFollowing();
                     }
@@ -174,6 +197,18 @@ namespace FGJ_2022.NPC
         {
             isCaught = true;
             IsFollowing = false;
+        }
+
+        private IEnumerator doVoice()
+        {
+            int length = SheepSounds.Length;
+            int soundIndex = Random.Range(0, length);
+
+            while (true)
+            {
+                yield return new WaitForSeconds(Random.Range(4, 20));
+                audioSrc.PlayOneShot(SheepSounds[soundIndex]);
+            }
         }
 
         private void OnDrawGizmos()

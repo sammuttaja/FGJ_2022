@@ -4,25 +4,38 @@ using UnityEngine.EventSystems;
 
 namespace FGJ_2022.UI
 {
-    [AddComponentMenu("FGJ_2022/UI Main Menu")]
+    [AddComponentMenu("FGJ_2022/UI/ Main Menu")]
     public class MainMenu : MonoBehaviour
     {
         [SerializeField]
         private GameObject scoreBoard;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            GameObject FTPno = GameObject.Find("Button name (No)");
-            EventSystem.current.SetSelectedGameObject(FTPno);
-        }
+        [SerializeField]
+        private GameObject continueBoard;
+
+        [SerializeField]
+        private GameObject continueButton;
+
+        [SerializeField]
+        private GameObject menuButtonContainer;
 
         /// <summary>
         /// Starts the game!
         /// </summary>
-        public void StartGameButton()
+        public void PressAnyKeyButton()
         {
             SceneManager.LoadSceneAsync("Tutorial");
+        }
+
+        /// <summary>
+        /// Opens the press any key to continue board.
+        /// </summary>
+        public void StartGameButton()
+        {
+            menuButtonContainer.SetActive(false);
+            scoreBoard.SetActive(false);
+            continueBoard.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(continueButton);
         }
 
         /// <summary>
@@ -31,9 +44,9 @@ namespace FGJ_2022.UI
         public void ScoresButton()
         {
             if (scoreBoard.activeSelf == false)
-            {
                 scoreBoard.SetActive(true);
-            }
+            else if (scoreBoard.activeSelf == true)
+                scoreBoard.SetActive(false);
         }
 
         /// <summary>

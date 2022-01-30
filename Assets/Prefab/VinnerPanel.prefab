@@ -30,12 +30,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6252854811779942877}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -68}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: -16.6771}
+  m_SizeDelta: {x: 800, y: 287.8034}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1327281442011776397
 CanvasRenderer:
@@ -65,7 +65,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You got the prize
+  m_text: "You won! You managed to dodge all the unsuspecting sheep \nand get to
+    the treasure. The shining amethyst is now yours \nto adore for all time. Or sell.
+    Imagine all the cool crafting \nsupplies you could get with that money. The possibilities
+    are\nendless.\r\n\r\n\nOn behalf of our game jam team, thank you for playing!\r\nAnton,
+    Joonas, Lauri and Maiju\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e12a8587dfed9e49a6dc63d22931349, type: 2}
   m_sharedMaterial: {fileID: 8747592722316007400, guid: 7e12a8587dfed9e49a6dc63d22931349, type: 2}
@@ -92,14 +96,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -164,8 +168,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6252854812274978874}
   - {fileID: 8661904563669316464}
+  - {fileID: 6252854812274978874}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.54901963, g: 0.9137255, b: 0.8784314, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -256,7 +260,7 @@ RectTransform:
   m_Children:
   - {fileID: 6252854812784876939}
   m_Father: {fileID: 6252854811779942877}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -347,7 +351,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6252854811779942872}
         m_TargetAssemblyTypeName: FGJ_2022.UI.GameOverControll, Assembly-CSharp
-        m_MethodName: RestartScene
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

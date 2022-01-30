@@ -3,7 +3,7 @@ using System;
 
 namespace FGJ_2022.Audio
 {
-    [AddComponentMenu("FGJ_2022/Music Music Manager")]
+    [AddComponentMenu("FGJ_2022/Music/ Music Manager")]
     public class MusicManager : MonoBehaviour
     {
         public bool isMasked { set; get; }

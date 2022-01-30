@@ -12,7 +12,7 @@ namespace FGJ_2022.UI
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        public void Quiit()
+        public void Quit()
         {
             SceneManager.LoadSceneAsync("MainMenu");
         }

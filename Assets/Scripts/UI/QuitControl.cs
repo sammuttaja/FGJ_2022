@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace FGJ_2022.UI
 {
-    [AddComponentMenu("FGJ_2022/UI Quit Control")]
+    [AddComponentMenu("FGJ_2022/UI/ Quit Control")]
     public class QuitControl : MonoBehaviour
     {
         [SerializeField]
