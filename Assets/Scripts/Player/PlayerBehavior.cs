@@ -131,10 +131,12 @@ namespace FGJ_2022.Player
             if (_mask._maskPower <= 0)
                 _withMask = false;
 
+            /*
             if (_withMask)
                 manager.PlayAudio(manager.hiipbassoloop);
             else
                 manager.PlayAudio(manager.walkbassoloop);
+            */
 
             Debug.Log("Mask power: " + _mask._maskPower);
         }
