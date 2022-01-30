@@ -49,7 +49,7 @@ namespace FGJ_2022.Player
 
         private void Start()
         {
-            manager = new MusicManager();
+            manager = GetComponent<MusicManager>();
         }
 
         private void Awake()
@@ -131,15 +131,25 @@ namespace FGJ_2022.Player
             if (_mask._maskPower <= 0)
                 _withMask = false;
 
-            /*
-            if (_withMask)
+            if (_withMask && !manager.hiipiPlaying)
+            {
                 manager.PlayAudio(manager.hiipbassoloop);
+                manager.hiipiPlaying = true;
+                manager.walkPlaying = false;
+            }
             else
-                manager.PlayAudio(manager.walkbassoloop);
-            */
+            {
+                if (!manager.walkPlaying && !_withMask)
+                {
+                    manager.PlayAudio(manager.walkbassoloop);
+                    manager.walkPlaying = true;
+                    manager.hiipiPlaying = false;
+                }
+            }
 
             Debug.Log("Mask power: " + _mask._maskPower);
         }
+
 
         private bool IsEnemyClose(out float distancetoEnemy)
         {

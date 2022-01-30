@@ -9,7 +9,9 @@ namespace FGJ_2022.Audio
         public bool isMasked { set; get; }
         public AudioClip walkbassoloop;
         public AudioClip hiipbassoloop;
-
+        public bool walkPlaying = false;
+        public bool hiipiPlaying = false;
+        [SerializeField]
         private AudioSource audioSrc;
 
         private void Awake()
