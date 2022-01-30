@@ -130,8 +130,10 @@ namespace FGJ_2022.Player
                 _mask._maskPower += 10f * Time.deltaTime;
 
             if (_mask._maskPower <= 0)
+            {
                 _withMask = false;
-
+                animator.SetBool("MaskOn", false);
+            }
             if (_withMask && !manager.hiipiPlaying)
             {
                 manager.PlayAudio(manager.hiipbassoloop);
