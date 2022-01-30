@@ -41,6 +41,8 @@ namespace FGJ_2022.Player
         private bool _withMask;
         private MusicManager manager;
         private AudioSource audioSrc;
+        [SerializeField]
+        private AudioSource MaskEfectSrc;
 
         public bool IsCaught { get; set; }
 
@@ -125,13 +127,13 @@ namespace FGJ_2022.Player
             {
                 _withMask = true;
                 animator.SetBool("MaskOn", true);
-                audioSrc.PlayOneShot(whooshLoud);
+                MaskEfectSrc.PlayOneShot(whooshLoud);
             }
             else if (_playerActions.Player.ActivateMask.WasPressedThisFrame() && _withMask == true)
             {
                 _withMask = false;
                 animator.SetBool("MaskOn", false);
-                audioSrc.PlayOneShot(whoosh);
+                MaskEfectSrc.PlayOneShot(whoosh);
             }
 
             if (_withMask && _mask._maskPower > 0)
@@ -147,7 +149,7 @@ namespace FGJ_2022.Player
             {
                 _withMask = false;
                 animator.SetBool("MaskOn", false);
-                audioSrc.PlayOneShot(whoosh);
+                MaskEfectSrc.PlayOneShot(whoosh);
             }
             if (_withMask && !manager.hiipiPlaying)
             {
