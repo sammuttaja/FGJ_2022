@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEditor.Animations;
 using FGJ_2022.Audio;
+using TMPro;
 
 namespace FGJ_2022.Player
 {
@@ -24,12 +25,22 @@ namespace FGJ_2022.Player
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        private TextMeshProUGUI powerText;
+
+        [SerializeField]
+        private AudioClip whooshLoud;
+
+        [SerializeField]
+        private AudioClip whoosh;
+
         private PlayerInputActions _playerActions;
         private Rigidbody2D _rbody;
         private Vector2 _moveInput;
         private PlayerMask _mask;
         private bool _withMask;
         private MusicManager manager;
+        private AudioSource audioSrc;
 
         public bool IsCaught { get; set; }
 
@@ -43,6 +54,7 @@ namespace FGJ_2022.Player
         private void Start()
         {
             manager = GetComponent<MusicManager>();
+            audioSrc = GetComponent<AudioSource>();
         }
 
         private void Awake()
@@ -113,11 +125,13 @@ namespace FGJ_2022.Player
             {
                 _withMask = true;
                 animator.SetBool("MaskOn", true);
+                audioSrc.PlayOneShot(whooshLoud);
             }
             else if (_playerActions.Player.ActivateMask.WasPressedThisFrame() && _withMask == true)
             {
                 _withMask = false;
                 animator.SetBool("MaskOn", false);
+                audioSrc.PlayOneShot(whoosh);
             }
 
             if (_withMask && _mask._maskPower > 0)
@@ -133,6 +147,7 @@ namespace FGJ_2022.Player
             {
                 _withMask = false;
                 animator.SetBool("MaskOn", false);
+                audioSrc.PlayOneShot(whoosh);
             }
             if (_withMask && !manager.hiipiPlaying)
             {
@@ -150,7 +165,8 @@ namespace FGJ_2022.Player
                 }
             }
 
-            Debug.Log("Mask power: " + _mask._maskPower);
+            // Update the UI in regards of power level.
+            powerText.SetText("Mask power: " + _mask._maskPower);
         }
 
 

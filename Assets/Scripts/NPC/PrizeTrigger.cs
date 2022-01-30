@@ -14,17 +14,32 @@ namespace FGJ_2022.NPC
         [SerializeField]
         private GameObject quitButton;
 
+        [SerializeField]
+        private AudioClip fanfare;
+
+        private AudioSource audioSrc;
+        private bool hasPlayed;
+
         private void Start()
         {
             EventSystem.current.SetSelectedGameObject(quitButton);
             Player = GameObject.FindGameObjectWithTag("Player").transform;
+            audioSrc = GetComponent<AudioSource>();
+
+            hasPlayed = false;
         }
 
         private void Update()
         {
             if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) <= 1f)
             {
+                if (hasPlayed == false)
+                {
+                    audioSrc.PlayOneShot(fanfare);
+                    hasPlayed = true;
+                }
                 WinningUI.SetActive(true);
+
                 NPC.NPCBehavior[] sheeps = GameObject.FindGameObjectsWithTag("NPC").Select(x => x.GetComponent<NPC.NPCBehavior>()).ToArray();
                 foreach (NPC.NPCBehavior sheep in sheeps)
                 {
