@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEditor.Animations;
 using FGJ_2022.Audio;
 
 namespace FGJ_2022.Player
@@ -24,20 +25,15 @@ namespace FGJ_2022.Player
         private Animator animator;
 
         [SerializeField]
-        Animation idle_West;
+        private RuntimeAnimatorController playercontroller;
         [SerializeField]
-        Animation idle_East;
-        [SerializeField]
-        Animation idle_North;
-        [SerializeField]
-        Animation idle_South;
+        private RuntimeAnimatorController SheepController;
 
         private PlayerInputActions _playerActions;
         private Rigidbody2D _rbody;
         private Vector2 _moveInput;
         private PlayerMask _mask;
         private bool _withMask;
-        private float MaskDrain = 10f;
         private MusicManager manager;
 
         private List<Transform> Enemys = new List<Transform>();
@@ -113,10 +109,12 @@ namespace FGJ_2022.Player
             if (_playerActions.Player.ActivateMask.WasPressedThisFrame() && _withMask == false)
             {
                 _withMask = true;
+                animator.SetBool("MaskOn", true);
             }
             else if (_playerActions.Player.ActivateMask.WasPressedThisFrame() && _withMask == true)
             {
                 _withMask = false;
+                animator.SetBool("MaskOn", false);
             }
 
             if (_withMask && _mask._maskPower > 0)

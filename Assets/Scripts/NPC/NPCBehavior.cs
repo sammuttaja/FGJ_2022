@@ -185,7 +185,7 @@ namespace FGJ_2022.NPC
 
             if (direction != Vector2.zero)
                 lastDirecton = direction;
-            animator.SetFloat("Speed", speed);
+            animator.SetFloat("_speed", speed);
             animator.SetFloat("Horizontal", direction.x);
             animator.SetFloat("Vertical", direction.y);
 
