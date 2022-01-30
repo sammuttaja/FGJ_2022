@@ -16,6 +16,9 @@ namespace FGJ_2022.Player
         private float _speed;
 
         [SerializeField]
+        private int _maskPower;
+
+        [SerializeField]
         private GameObject pauseContainer;
 
         [SerializeField]
@@ -68,7 +71,7 @@ namespace FGJ_2022.Player
             _withMask = false;
 
             _playerActions = new PlayerInputActions();
-            _mask = new PlayerMask(100);
+            _mask = new PlayerMask(_maskPower);
 
             _rbody = GetComponent<Rigidbody2D>();
             if (_rbody == null)
@@ -152,7 +155,7 @@ namespace FGJ_2022.Player
             }
             if (_withMask && !manager.hiipiPlaying)
             {
-                manager.PlayAudio(manager.hiipbassoloop);
+                manager.PlayAudio(manager.walkbassoloop);
                 manager.hiipiPlaying = true;
                 manager.walkPlaying = false;
             }
@@ -160,7 +163,7 @@ namespace FGJ_2022.Player
             {
                 if (!manager.walkPlaying && !_withMask)
                 {
-                    manager.PlayAudio(manager.walkbassoloop);
+                    manager.PlayAudio(manager.hiipbassoloop);
                     manager.walkPlaying = true;
                     manager.hiipiPlaying = false;
                 }

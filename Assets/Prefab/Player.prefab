@@ -420,6 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _maskPower: 50
   pauseContainer: {fileID: 0}
   noButton: {fileID: 0}
   animator: {fileID: 0}
