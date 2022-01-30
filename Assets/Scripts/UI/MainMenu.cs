@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 namespace FGJ_2022.UI
 {
@@ -12,7 +13,8 @@ namespace FGJ_2022.UI
         // Start is called before the first frame update
         void Start()
         {
-
+            GameObject FTPno = GameObject.Find("Button name (No)");
+            EventSystem.current.SetSelectedGameObject(FTPno);
         }
 
         /// <summary>

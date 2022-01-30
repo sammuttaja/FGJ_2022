@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using FGJ_2022.Audio;
 
 namespace FGJ_2022.Player
 {
@@ -37,12 +38,18 @@ namespace FGJ_2022.Player
         private PlayerMask _mask;
         private bool _withMask;
         private float MaskDrain = 10f;
+        private MusicManager manager;
 
         private List<Transform> Enemys = new List<Transform>();
 
         public bool IsMaskOn
         {
             get { return _withMask; }
+        }
+
+        private void Start()
+        {
+            manager = new MusicManager();
         }
 
         private void Awake()
@@ -124,7 +131,12 @@ namespace FGJ_2022.Player
             if (_mask._maskPower <= 0)
                 _withMask = false;
 
-            Debug.Log("Is with mask: " + _mask._maskPower);
+            if (_withMask)
+                manager.PlayAudio(manager.hiipbassoloop);
+            else
+                manager.PlayAudio(manager.walkbassoloop);
+
+            Debug.Log("Mask power: " + _mask._maskPower);
         }
 
         private bool IsEnemyClose(out float distancetoEnemy)
