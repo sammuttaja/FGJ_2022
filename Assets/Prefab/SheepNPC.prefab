@@ -101,7 +101,7 @@ MonoBehaviour:
   Speed: 4
   MovementRadius: 2
   ViewRadius: 3
-  caughtMinDistance: 0.4
+  caughtMinDistance: 0.6
   Player: {fileID: 0}
   Behavior: 0
   GameoverUI: {fileID: 0}

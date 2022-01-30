@@ -135,8 +135,6 @@ namespace FGJ_2022.NPC
                         sheep.StopFollowing();
                     }
                 }
-
-
             }
         }
         int TargetIndex = 0;

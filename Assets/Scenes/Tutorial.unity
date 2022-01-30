@@ -452,6 +452,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VinnerPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 6252854811779942873, guid: fb3d90b65e6546c4dbb8c43edf4d73ee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6252854811779942877, guid: fb3d90b65e6546c4dbb8c43edf4d73ee, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -482,11 +486,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6252854811779942877, guid: fb3d90b65e6546c4dbb8c43edf4d73ee, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -817.5111
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 6252854811779942877, guid: fb3d90b65e6546c4dbb8c43edf4d73ee, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 9.177246
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6252854811779942877, guid: fb3d90b65e6546c4dbb8c43edf4d73ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -518,11 +522,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6252854811779942877, guid: fb3d90b65e6546c4dbb8c43edf4d73ee, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -408.7556
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6252854811779942877, guid: fb3d90b65e6546c4dbb8c43edf4d73ee, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4.588623
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6252854811779942877, guid: fb3d90b65e6546c4dbb8c43edf4d73ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -675,6 +679,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 211845022}
     m_Modifications:
+    - target: {fileID: 8395344862404423330, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395344862404423330, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395344862404423330, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395344862404423330, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -97.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8395344862882666305, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
       propertyPath: m_Name
       value: GameOverPanel
@@ -766,6 +786,22 @@ PrefabInstance:
     - target: {fileID: 8395344862882666309, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395344863989501112, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395344863989501112, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395344863989501112, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395344863989501112, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44ddbf32bb0217b4da4c97b44cc4523b, type: 3}
@@ -1076,7 +1112,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1087,7 +1123,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
 --- !u!95 &469032903
 Animator:
