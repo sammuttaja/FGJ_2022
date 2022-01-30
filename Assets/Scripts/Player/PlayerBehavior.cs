@@ -31,6 +31,8 @@ namespace FGJ_2022.Player
         private bool _withMask;
         private MusicManager manager;
 
+        public bool IsCaught { get; set; }
+
         private List<Transform> Enemys = new List<Transform>();
 
         public bool IsMaskOn
@@ -74,6 +76,12 @@ namespace FGJ_2022.Player
 
         private void FixedUpdate()
         {
+            if (IsCaught)
+            {
+                _rbody.velocity = Vector2.zero;
+                animator.SetFloat("_speed", 0);
+                return;
+            }
             // Get the input from WASD / arrows and set the movement.
             _moveInput = _playerActions.Player.Move.ReadValue<Vector2>();
             _rbody.velocity = _moveInput * _speed;

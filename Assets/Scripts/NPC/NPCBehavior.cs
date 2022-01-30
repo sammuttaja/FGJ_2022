@@ -124,6 +124,7 @@ namespace FGJ_2022.NPC
                 Animate(PlayerDir, speed.magnitude);
                 if (Vector2.Distance(PlayerPos, NpcPosition) < caughtMinDistance)
                 {
+                    playerData.IsCaught = true;
                     //TODO Add game over
                     if (GameoverUI != null)
                         GameoverUI.SetActive(true);
@@ -212,6 +213,8 @@ namespace FGJ_2022.NPC
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(transform.position, ViewRadius);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, caughtMinDistance);
         }
 
         private void OnDisable()
